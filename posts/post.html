@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="page-title">Post - My Personal Blog</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <header>
+        <h1>My Personal Blog</h1>
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="../about.html">About</a>
+        </nav>
+    </header>
+
+    <main>
+        <a href="../index.html" class="back-link">← Back to Home</a>
+        
+        <article class="blog-post">
+            <p class="post-meta" id="post-date"></p>
+            <div class="post-content" id="post-content">
+                <p>Loading post...</p>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 My Personal Blog. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Simple markdown parser
+        function parseMarkdown(markdown) {
+            let html = markdown;
+            
+            // Headers
+            html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>');
+            html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');
+            html = html.replace(/^# (.*$)/gim, '<h1>$1</h1>');
+            
+            // Bold
+            html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+            
+            // Italic
+            html = html.replace(/\*(.+?)\*/g, '<em>$1</em>');
+            
+            // Inline code
+            html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
+            
+            // Blockquotes
+            html = html.replace(/^&gt; (.*$)/gim, '<blockquote>$1</blockquote>');
+            html = html.replace(/^> (.*$)/gim, '<blockquote>$1</blockquote>');
+            
+            // Links
+            html = html.replace(/\[([^\]]+)\]\(([^\)]+)\)/g, '<a href="$2">$1</a>');
+            
+            // Unordered lists
+            html = html.replace(/^\- (.+)$/gim, '<li>$1</li>');
+            html = html.replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>');
+            
+            // Ordered lists
+            html = html.replace(/^\d+\. (.+)$/gim, '<li>$1</li>');
+            
+            // Paragraphs
+            html = html.split('\n\n').map(para => {
+                para = para.trim();
+                if (para && !para.startsWith('<h') && !para.startsWith('<ul') && 
+                    !para.startsWith('<ol') && !para.startsWith('<blockquote') &&
+                    !para.startsWith('<li>')) {
+                    return '<p>' + para + '</p>';
+                }
+                return para;
+            }).join('\n');
+            
+            return html;
+        }
+        
+        // Get the post filename from URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const postFile = urlParams.get('post');
+        
+        if (postFile) {
+            // Fetch and render the markdown file
+            fetch(postFile)
+                .then(response => response.text())
+                .then(markdown => {
+                    // Parse frontmatter
+                    const frontmatterRegex = /^---\s*\n([\s\S]*?)\n---\s*\n([\s\S]*)$/;
+                    const match = markdown.match(frontmatterRegex);
+                    
+                    let content = markdown;
+                    let title = 'Blog Post';
+                    let date = '';
+                    
+                    if (match) {
+                        const frontmatter = match[1];
+                        content = match[2];
+                        
+                        // Parse frontmatter fields
+                        const titleMatch = frontmatter.match(/title:\s*(.+)/);
+                        const dateMatch = frontmatter.match(/date:\s*(.+)/);
+                        
+                        if (titleMatch) title = titleMatch[1].trim();
+                        if (dateMatch) date = dateMatch[1].trim();
+                    }
+                    
+                    // Update page title and date
+                    document.getElementById('page-title').textContent = title + ' - My Personal Blog';
+                    document.getElementById('post-date').textContent = date;
+                    
+                    // Render markdown to HTML
+                    document.getElementById('post-content').innerHTML = parseMarkdown(content);
+                })
+                .catch(error => {
+                    document.getElementById('post-content').innerHTML = '<p>Error loading post. <a href="../index.html">Return to home</a></p>';
+                    console.error('Error loading post:', error);
+                });
+        } else {
+            document.getElementById('post-content').innerHTML = '<p>No post specified. <a href="../index.html">Return to home</a></p>';
+        }
+    </script>
+</body>
+</html>
