@@ -39,11 +39,18 @@ This blog uses Markdown files for writing posts. To add a new blog post:
 
 ## Local Development
 
-To test your blog locally:
+To test your blog locally, you need to serve the files with an HTTP server (opening HTML files directly in the browser won't work due to CORS restrictions when loading markdown files).
 
+**Using Python 3** (most common method):
 ```bash
+# From the project root directory
 python3 -m http.server 8000
 ```
+
+**Alternative methods:**
+- Using Node.js: `npx http-server`
+- Using PHP: `php -S localhost:8000`
+- Using VS Code: Install the "Live Server" extension
 
 Then visit `http://localhost:8000` in your browser.
 
