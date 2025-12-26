@@ -40,14 +40,14 @@
             html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');
             html = html.replace(/^# (.*$)/gim, '<h1>$1</h1>');
             
-            // Bold
+            // Inline code (process before bold/italic to avoid conflicts)
+            html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
+            
+            // Bold (process before italic)
             html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
             
             // Italic
-            html = html.replace(/\*(.+?)\*/g, '<em>$1</em>');
-            
-            // Inline code
-            html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
+            html = html.replace(/(?<!\*)\*(?!\*)(.+?)(?<!\*)\*(?!\*)/g, '<em>$1</em>');
             
             // Blockquotes
             html = html.replace(/^&gt; (.*$)/gim, '<blockquote>$1</blockquote>');
@@ -56,12 +56,53 @@
             // Links
             html = html.replace(/\[([^\]]+)\]\(([^\)]+)\)/g, '<a href="$2">$1</a>');
             
-            // Unordered lists
-            html = html.replace(/^\- (.+)$/gim, '<li>$1</li>');
-            html = html.replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>');
+            // Process lists
+            const lines = html.split('\n');
+            let inUnorderedList = false;
+            let inOrderedList = false;
+            const processedLines = [];
             
-            // Ordered lists
-            html = html.replace(/^\d+\. (.+)$/gim, '<li>$1</li>');
+            for (let i = 0; i < lines.length; i++) {
+                const line = lines[i];
+                const isUnorderedItem = /^- (.+)$/.test(line);
+                const isOrderedItem = /^\d+\. (.+)$/.test(line);
+                
+                if (isUnorderedItem) {
+                    if (!inUnorderedList) {
+                        processedLines.push('<ul>');
+                        inUnorderedList = true;
+                    }
+                    processedLines.push(line.replace(/^- (.+)$/, '<li>$1</li>'));
+                } else {
+                    if (inUnorderedList) {
+                        processedLines.push('</ul>');
+                        inUnorderedList = false;
+                    }
+                }
+                
+                if (isOrderedItem) {
+                    if (!inOrderedList) {
+                        processedLines.push('<ol>');
+                        inOrderedList = true;
+                    }
+                    processedLines.push(line.replace(/^\d+\. (.+)$/, '<li>$1</li>'));
+                } else {
+                    if (inOrderedList) {
+                        processedLines.push('</ol>');
+                        inOrderedList = false;
+                    }
+                }
+                
+                if (!isUnorderedItem && !isOrderedItem) {
+                    processedLines.push(line);
+                }
+            }
+            
+            // Close any open lists
+            if (inUnorderedList) processedLines.push('</ul>');
+            if (inOrderedList) processedLines.push('</ol>');
+            
+            html = processedLines.join('\n');
             
             // Paragraphs
             html = html.split('\n\n').map(para => {
