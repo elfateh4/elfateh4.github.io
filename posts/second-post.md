@@ -1,6 +1,7 @@
 ---
 title: Getting Started with GitHub Pages
 date: December 25, 2025
+tags: github, tutorial, web-development
 ---
 
 # Getting Started with GitHub Pages

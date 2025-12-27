@@ -77,6 +77,22 @@ main {
     margin-bottom: 15px;
 }
 
+.post-tags {
+    margin-bottom: 20px;
+}
+
+.tag {
+    display: inline-block;
+    padding: 4px 12px;
+    margin-right: 8px;
+    margin-bottom: 8px;
+    border: 1px solid #000;
+    font-size: 0.9em;
+    text-transform: lowercase;
+    background-color: #fff;
+    color: #000;
+}
+
 .blog-post p {
     margin-bottom: 15px;
 }
