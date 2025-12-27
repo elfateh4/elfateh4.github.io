@@ -6,15 +6,24 @@ My Personal Blog - A simple, clean blog hosted on GitHub Pages with a black and 
 
 This blog uses Markdown files for writing posts. To add a new blog post:
 
-1. **Create a new markdown file** in the `posts/` directory (e.g., `posts/my-new-post.md`)
+1. **Use the post template** - Copy `posts/post-template.md` to create your new post:
+   ```bash
+   cp posts/post-template.md posts/my-new-post.md
+   ```
 
 2. **Add frontmatter** at the top of your markdown file:
    ```markdown
    ---
    title: Your Post Title
    date: Month Day, Year
+   tags: tag1, tag2, tag3
    ---
    ```
+   
+   The frontmatter includes:
+   - **title**: The title of your blog post
+   - **date**: Publication date (format: "Month Day, Year")
+   - **tags**: Comma-separated list of tags for categorizing your post
 
 3. **Write your content** using standard Markdown syntax below the frontmatter:
    - Headers: `#`, `##`, `###`
@@ -30,12 +39,25 @@ This blog uses Markdown files for writing posts. To add a new blog post:
    <article class="blog-post">
        <h2><a href="posts/post.html?post=my-new-post.md">Your Post Title</a></h2>
        <p class="post-meta">Month Day, Year</p>
+       <div class="post-tags">
+           <span class="tag">tag1</span>
+           <span class="tag">tag2</span>
+           <span class="tag">tag3</span>
+       </div>
        <p>Brief description or excerpt...</p>
        <a href="posts/post.html?post=my-new-post.md" class="read-more">Read more →</a>
    </article>
    ```
 
 5. **Commit and push** your changes to GitHub, and your post will be live!
+
+## Tags Feature
+
+Posts now support tags for better categorization and organization. Tags are:
+- Defined in the frontmatter as comma-separated values
+- Displayed below the post date on both the homepage and individual post pages
+- Styled with a simple black border to match the blog's minimalist design
+- Automatically converted to lowercase for consistency
 
 ## Local Development
 

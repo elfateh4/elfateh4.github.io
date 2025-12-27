@@ -1,6 +1,7 @@
 ---
 title: The Beauty of Simplicity
 date: December 24, 2025
+tags: design, minimalism, philosophy
 ---
 
 # The Beauty of Simplicity

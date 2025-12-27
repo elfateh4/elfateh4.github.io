@@ -20,6 +20,7 @@
         
         <article class="blog-post">
             <p class="post-meta" id="post-date"></p>
+            <div class="post-tags" id="post-tags"></div>
             <div class="post-content" id="post-content">
                 <p>Loading post...</p>
             </div>
@@ -136,6 +137,7 @@
                     let content = markdown;
                     let title = 'Blog Post';
                     let date = '';
+                    let tags = '';
                     
                     if (match) {
                         const frontmatter = match[1];
@@ -144,14 +146,23 @@
                         // Parse frontmatter fields
                         const titleMatch = frontmatter.match(/title:\s*(.+)/);
                         const dateMatch = frontmatter.match(/date:\s*(.+)/);
+                        const tagsMatch = frontmatter.match(/tags:\s*(.+)/);
                         
                         if (titleMatch) title = titleMatch[1].trim();
                         if (dateMatch) date = dateMatch[1].trim();
+                        if (tagsMatch) tags = tagsMatch[1].trim();
                     }
                     
                     // Update page title and date
                     document.getElementById('page-title').textContent = title + ' - My Personal Blog';
                     document.getElementById('post-date').textContent = date;
+                    
+                    // Update tags
+                    if (tags) {
+                        const tagsArray = tags.split(',').map(tag => tag.trim());
+                        const tagsHTML = tagsArray.map(tag => `<span class="tag">${tag}</span>`).join('');
+                        document.getElementById('post-tags').innerHTML = tagsHTML;
+                    }
                     
                     // Render markdown to HTML
                     document.getElementById('post-content').innerHTML = parseMarkdown(content);
