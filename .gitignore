@@ -1,0 +1,23 @@
+.venv/
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+.DS_Store
+.idea/
+.vscode/
+node_modules/
+*.log
+
+# Editor temp files
+*~
+*.swp
+
+# Ignore build artifacts
+dist/
+build/
+
+# Mac/Windows
+Thumbs.db
