@@ -1,0 +1,8 @@
+title: "Elfateh Blog"
+email: ""
+description: "A simple personal blog"
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "https://elfateh4.github.io"
+permalink: /posts/:year/:month/:day/:title.html
+markdown: kramdown
+collections: {}
