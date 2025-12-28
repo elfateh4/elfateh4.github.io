@@ -1,6 +1,6 @@
 ---
 title: Welcome to My Blog
-date: December 26, 2025
+date: December 30, 2025
 tags: welcome, blogging, personal
 ---
 
