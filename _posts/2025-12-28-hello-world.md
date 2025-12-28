@@ -1,6 +1,6 @@
 ---
 title: Hello World
-date: 2025-12-29
+date: 2025-12-28
 tags: [welcome, blogging, personal]
 ---
 
