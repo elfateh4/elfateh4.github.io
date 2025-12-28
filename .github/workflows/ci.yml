@@ -23,13 +23,10 @@ jobs:
 
       - name: Install dependencies
         run: |
-          # Install a Bundler 4.x version that matches the Gemfile requirement
-          gem install bundler -v '4.0.3'
-          ruby -v
+          gem install bundler
           gem list bundler
-          # Use the specific bundler binary to avoid version mismatch
-          bundle _4.0.3_ config set path 'vendor/bundle' || true
-          bundle _4.0.3_ install --jobs 4 --retry 3
+          bundle config set path 'vendor/bundle' || true
+          bundle install --jobs 4 --retry 3
 
       - name: Run CI target (jekyll doctor + build)
         run: make ci
