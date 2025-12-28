@@ -19,5 +19,21 @@ node_modules/
 dist/
 build/
 
+# Jekyll / Ruby
+_site/
+.jekyll-cache/
+.jekyll-metadata
+.bundle/
+vendor/
+Gemfile.lock
+
+# Ruby dev / bundler
+.bundle/
+vendor/bundle/
+
+# Other caches
+.cache/
+.sass-cache/
+
 # Mac/Windows
 Thumbs.db
