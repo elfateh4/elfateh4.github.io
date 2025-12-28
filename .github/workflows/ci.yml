@@ -18,7 +18,9 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.2'
-          bundler-cache: true
+          # Disable the automatic bundler-cache behavior so the action won't run
+          # `bundle` using the system Bundler before we install the required Bundler 4.x.
+          bundler-cache: false
           cache-version: 2
 
       - name: Install dependencies
