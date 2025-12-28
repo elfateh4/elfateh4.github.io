@@ -1,10 +1,10 @@
 ---
-title: Welcome to My Blog
-date: 2025-12-26
+title: Hello World
+date: 2025-12-29
 tags: [welcome, blogging, personal]
 ---
 
-# Welcome to My Blog
+# Hello World
 
 Hello and welcome to my personal blog! I'm excited to finally launch this space where I can share my thoughts, experiences, and ideas with the world.
 
