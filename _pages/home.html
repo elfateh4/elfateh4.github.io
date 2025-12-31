@@ -7,19 +7,33 @@ order: 1
 
 <section>
   {% assign visible_posts = site.posts | where_exp: "p", "p.date <= site.time" | sort: 'date' | reverse %}
-  {% for post in visible_posts limit:3 %}
-  <article class="blog-post">
-    <h2><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
-    <p class="post-meta">{{ post.date | date: "%B %d, %Y" }}</p>
-    {% if post.tags %}
+  {% assign processed_slugs = "" | split: "," %}
+  {% assign count = 0 %}
+  {% for post in visible_posts %}
+    {% unless processed_slugs contains post.base_slug %}
+      {% assign processed_slugs = processed_slugs | push: post.base_slug %}
+      {% assign en_post = visible_posts | where: "base_slug", post.base_slug | where: "lang", "en" | first %}
+      {% if en_post %}
+        {% assign display_post = en_post %}
+      {% else %}
+        {% assign display_post = post %}
+      {% endif %}
+      {% assign count = count | plus: 1 %}
+      {% if count <= 3 %}
+  <article class="blog-post {% if display_post.lang == 'ar' %}arabic rtl{% endif %}">
+    <h2><a href="{{ display_post.url | relative_url }}">{{ display_post.title }}</a></h2>
+    <p class="post-meta">{{ display_post.date | date: "%B %d, %Y" }}</p>
+    {% if display_post.tags %}
     <div class="post-tags">
-      {% for tag in post.tags %}
+      {% for tag in display_post.tags %}
       <span class="tag">{{ tag }}</span>
       {% endfor %}
     </div>
     {% endif %}
-    <p>{{ post.excerpt | strip_html | truncate: 200 }}</p>
-    <a href="{{ post.url | relative_url }}" class="read-more">Read more →</a>
+    <p>{{ display_post.excerpt | strip_html | truncate: 200 }}</p>
+    <a href="{{ display_post.url | relative_url }}" class="read-more">Read more →</a>
   </article>
+      {% endif %}
+    {% endunless %}
   {% endfor %}
 </section>

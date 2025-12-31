@@ -4,8 +4,18 @@ layout: base
 
 <main>
   <article class="blog-post">
-    <h2>{{ page.title }}</h2>
+    <div class="post-header">
+      <h2>{{ page.title }}</h2>
+      <div class="lang-switcher">
+        {% assign other_slug = page.slug %}{% if page.lang == 'ar' %}{% assign other_slug = page.slug | remove: '-ar' %}{% else %}{% assign other_slug = page.slug | append: '-ar' %}{% endif %}
+        <a href="/posts/{{ other_slug }}/" class="lang-link">{% if page.lang == 'ar' %}English{% else %}العربية{% endif %}</a>
+      </div>
+    </div>
+    {% if page.lang == 'ar' %}
+    <p class="post-meta">{{ page.date | date: "%-d" }} {% assign m = page.date | date: "%-m" %}{% case m %}{% when '1' %}يناير{% when '2' %}فبراير{% when '3' %}مارس{% when '4' %}أبريل{% when '5' %}مايو{% when '6' %}يونيو{% when '7' %}يوليو{% when '8' %}أغسطس{% when '9' %}سبتمبر{% when '10' %}أكتوبر{% when '11' %}نوفمبر{% when '12' %}ديسمبر{% endcase %} {{ page.date | date: "%Y" }}</p>
+    {% else %}
     <p class="post-meta">{{ page.date | date: "%B %d, %Y" }}</p>
+    {% endif %}
     {% if page.tags %}
     <div class="post-tags">
       {% for tag in page.tags %}

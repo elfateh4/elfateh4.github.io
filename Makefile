@@ -4,22 +4,23 @@
 #   make serve              # serve site locally (with livereload)
 #   make build              # build site into _site
 #   make clean              # remove build artifacts
-#   make newpost TITLE="My Post" [TAGS="a,b"] [EXCERPT="Short summary"]
+#   make newpost
 
 BUNDLE ?= bundle
 JEKYLL  ?= $(BUNDLE) exec jekyll
 PORT    ?= 4000
 
-.PHONY: help install serve build clean newpost check ci
+.PHONY: help install serve build clean newpost check ci validate
 
 help:
 	@echo "Makefile targets for this repo"
 	@echo "  install        Install Ruby gems (bundle install)"
 	@echo "  serve          Serve site locally (requires bundler & jekyll)"
-	@echo "  build          Build site into _site"
+	@echo "  build          Build site into _site (with validation)"
 	@echo "  clean          Remove _site and caches"
-	@echo "  newpost        Scaffold a new post: make newpost TITLE=\"Title\" [TAGS=\"t1,t2\"] [EXCERPT=\"short\"]"
+	@echo "  newpost        Scaffold a new post interactively"
 	@echo "  check          Run 'jekyll doctor'"
+	@echo "  validate       Validate base_slug uniqueness per lang"
 
 install:
 	@echo "Installing gems..."
@@ -30,10 +31,14 @@ serve:
 	$(JEKYLL) serve --livereload --port $(PORT)
 
 build:
+	./validate.rb
 	$(JEKYLL) build
 
 check:
 	$(JEKYLL) doctor || true
+
+validate:
+	./validate.rb
 
 ci:
 	@echo "Running CI checks..."
@@ -44,12 +49,8 @@ clean:
 	@echo "Cleaning build artifacts..."
 	rm -rf _site .jekyll-cache .sass-cache .bundle vendor/bundle
 
-# Use: make newpost TITLE="My Post" [TAGS="a,b"] [EXCERPT="Short summary"]
+# Use: make newpost
 newpost:
-	@# Use: make newpost TITLE="My Post" [TAGS="a,b"] [EXCERPT="Short summary"]
-	@if [ -z "$(TITLE)" ]; then \
-		echo "TITLE is required. Usage: make newpost TITLE=\"My Post\" [TAGS=\"a,b\"] [EXCERPT=\"Short summary\"]"; exit 1; \
-	fi
 	@echo "Scaffolding new post..."
-	@sh scripts/new_post.sh --title "$(TITLE)" $(if $(TAGS),--tags "$(TAGS)") $(if $(EXCERPT),--excerpt "$(EXCERPT)")
+	@sh scripts/new_post.sh
 

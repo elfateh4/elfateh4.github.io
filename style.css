@@ -5,13 +5,21 @@
 }
 
 body {
-    font-family: 'Georgia', 'Times New Roman', serif;
+    font-family: 'Georgia', 'Times New Roman', 'Arial', serif;
     line-height: 1.6;
     color: #000;
     background-color: #fff;
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
+}
+
+.arabic {
+    font-family: 'Zain', 'Arial', serif;
+}
+
+.rtl {
+    direction: rtl;
 }
 
 header {
@@ -83,10 +91,36 @@ main {
     text-decoration: underline;
 }
 
+.post-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
 .post-meta {
     color: #666;
     font-style: italic;
     margin-bottom: 15px;
+}
+
+.lang-switcher {
+    margin-bottom: 15px;
+}
+
+.lang-link {
+    color: #000;
+    text-decoration: none;
+    font-weight: bold;
+    border: 2px solid #000;
+    padding: 6px 12px;
+    display: inline-block;
+    transition: all 0.3s;
+}
+
+.lang-link:hover {
+    background-color: #000;
+    color: #fff;
 }
 
 .post-tags {
