@@ -1,18 +1,21 @@
 ---
-layout: default
+layout: base
 ---
-<article class="blog-post">
-  <h2>{{ page.title }}</h2>
-  <p class="post-meta">{{ page.date | date: "%B %d, %Y" }}</p>
-  {% if page.tags %}
-  <div class="post-tags">
-    {% for tag in page.tags %}
-      <span class="tag">{{ tag }}</span>
-    {% endfor %}
-  </div>
-  {% endif %}
 
-  <div class="post-content">
-    {{ content }}
-  </div>
-</article>
+<main>
+  <article class="blog-post">
+    <h2>{{ page.title }}</h2>
+    <p class="post-meta">{{ page.date | date: "%B %d, %Y" }}</p>
+    {% if page.tags %}
+    <div class="post-tags">
+      {% for tag in page.tags %}
+        <span class="tag">{{ tag }}</span>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="post-content">
+      {{ content }}
+    </div>
+  </article>
+</main>

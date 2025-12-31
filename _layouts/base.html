@@ -13,14 +13,21 @@
   <header>
     <h1><a href="{{ '/' | relative_url }}">{{ site.title }}</a></h1>
     <nav>
-      <a href="{{ '/' | relative_url }}">Home</a>
-      <a href="{{ '/about' | relative_url }}">About</a>
+      {% assign nav_pages = site.pages %}
+      {% if site.collections.pages %}
+        {% assign nav_pages = nav_pages | concat: site.collections.pages.docs %}
+      {% endif %}
+      {% assign nav_pages = nav_pages | sort: "title" %}
+      {% for p in nav_pages %}
+        {% if p.title and p.url %}
+          <a href="{{ p.url | relative_url }}" {% if p.url == page.url %}aria-current="page"{% endif %}>{{ p.title }}</a>
+        {% endif %}
+      {% endfor %}
     </nav>
   </header>
 
-  <main>
-    {{ content }}
-  </main>
+  <!-- Main content injected from child layouts -->
+  {{ content }}
 
   <footer>
     <p>&copy; {{ site.time | date: '%Y' }} {{ site.title }}. All rights reserved.</p>

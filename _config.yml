@@ -5,7 +5,10 @@ baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://elfateh4.github.io"
 permalink: /posts/:title/
 markdown: kramdown
-collections: {}
+collections:
+  pages:
+    output: true
+    permalink: /:path/
 
 # Umami Analytics configuration
 umami:
