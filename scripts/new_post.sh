@@ -66,7 +66,7 @@ create_post() {
   local post_excerpt="$3"
   local filename_suffix
 
-  filename_suffix=$(slugify "$post_title")
+  filename_suffix="$BASE_SLUG"
   if [ "$post_lang" = "ar" ]; then
     filename_suffix="$filename_suffix-ar"
   fi

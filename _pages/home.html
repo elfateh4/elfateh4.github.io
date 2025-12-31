@@ -21,7 +21,7 @@ order: 1
       {% assign count = count | plus: 1 %}
       {% if count <= 3 %}
   <article class="blog-post {% if display_post.lang == 'ar' %}arabic rtl{% endif %}">
-    <h2><a href="{{ display_post.url | relative_url }}">{{ display_post.title }}</a></h2>
+    <h2>{{ display_post.title }}</h2>
     <p class="post-meta">{{ display_post.date | date: "%B %d, %Y" }}</p>
     {% if display_post.tags %}
     <div class="post-tags">
