@@ -231,3 +231,22 @@ footer {
         font-size: 1.5em;
     }
 }
+
+/* Custom selection colors */
+::-webkit-selection {
+    background: #000;
+    color: #fff;
+}
+::-moz-selection {
+    background: #000;
+    color: #fff;
+}
+::selection {
+    background: #000;
+    color: #fff;
+}
+
+/* All hyperlinks in gray */
+a {
+    color: #666;
+}
