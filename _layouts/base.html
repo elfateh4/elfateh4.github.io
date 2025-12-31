@@ -40,6 +40,7 @@
   {% endif %}
 
   <link rel="stylesheet" href="{{ '/style.css' | relative_url }}">
+  <link rel="icon" type="image/svg+xml" href="{{ '/assets/favicon.svg' | relative_url }}">
   {% if jekyll.environment == "production" and site.umami.website_id %}
   <script defer src="{{ site.umami.script_url }}" data-website-id="{{ site.umami.website_id }}"></script>
   {% endif %}
