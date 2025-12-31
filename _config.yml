@@ -3,6 +3,11 @@ email: ""
 description: "A simple personal blog"
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://elfateh4.github.io"
-permalink: /posts/:year/:month/:day/:title.html
+permalink: /posts/:title/
 markdown: kramdown
 collections: {}
+
+# Umami Analytics configuration
+umami:
+  script_url: "https://umami.gate.3launchpad.com/script.js"
+  website_id: "39188739-82bb-485a-b32d-320866ae327b"
