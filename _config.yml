@@ -6,7 +6,7 @@ url: "https://elfateh4.github.io"
 permalink: /posts/:title/
 
 # SEO defaults
-social_image: "/assets/social.png" # change to your preferred default social image (absolute or site-relative)
+social_image: "/assets/images/social.png" # change to your preferred default social image (absolute or site-relative)
 twitter_username: "elfateh_4" 
 markdown: kramdown
 collections:

@@ -1,0 +1,25 @@
+/* ========================================
+   Responsive Design
+   ======================================== */
+@media (max-width: 600px) {
+    body {
+        padding: var(--spacing-small);
+    }
+
+    header h1 {
+        font-size: 2em;
+    }
+
+    .blog-post h2 {
+        font-size: 1.5em;
+    }
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        display: none;
+    }
+    body {
+        margin-left: 3%;
+    }
+}

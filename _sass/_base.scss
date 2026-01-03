@@ -1,0 +1,81 @@
+/* ========================================
+   CSS Custom Properties (Variables)
+   ======================================== */
+:root {
+    --color-primary: #000;
+    --color-secondary: #666;
+    --color-background: #fff;
+    --color-accent: #f5f5f5;
+    --color-border: #ddd;
+
+    --font-family-primary: 'Ubuntu', sans-serif;
+    --font-family-ar: 'Zain', 'Arial', serif;
+    --font-family-mono: 'Courier New', monospace;
+
+    --line-height: 1.6;
+    --spacing-small: 10px;
+    --spacing-medium: 15px;
+    --spacing-large: 20px;
+    --spacing-xlarge: 30px;
+    --spacing-xxlarge: 40px;
+
+    --border-width-thin: 1px;
+    --border-width-medium: 2px;
+    --border-width-thick: 4px;
+
+    --transition-duration: 0.3s;
+}
+
+/* ========================================
+   Reset and Base Styles
+   ======================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-family-primary);
+    line-height: var(--line-height);
+    color: var(--color-primary);
+    background-color: var(--color-background);
+    margin: 0 3% 0 270px;
+    padding: var(--spacing-large);
+}
+
+/* ========================================
+   Typography and Language Support
+   ======================================== */
+.ar {
+    font-family: var(--font-family-ar);
+}
+
+.rtl {
+    direction: rtl;
+}
+
+/* ========================================
+   Global Link Colors
+   ======================================== */
+a {
+    color: var(--color-secondary);
+}
+
+/* ========================================
+   Custom Selection Colors
+   ======================================== */
+::-webkit-selection {
+    background: var(--color-primary);
+    color: var(--color-background);
+}
+
+::-moz-selection {
+    background: var(--color-primary);
+    color: var(--color-background);
+}
+
+::selection {
+    background: var(--color-primary);
+    color: var(--color-background);
+}

@@ -1,0 +1,24 @@
+/* ========================================
+   About Page Styles
+   ======================================== */
+.about-content {
+    margin-top: var(--spacing-xlarge);
+}
+
+.about-content h2 {
+    font-size: 2em;
+    margin-bottom: var(--spacing-large);
+}
+
+.about-content p {
+    margin-bottom: var(--spacing-large);
+}
+
+.about-content ul {
+    margin-left: var(--spacing-xlarge);
+    margin-bottom: var(--spacing-large);
+}
+
+.about-content li {
+    margin-bottom: var(--spacing-medium);
+}

@@ -1,0 +1,21 @@
+/* ========================================
+   Navigation Styles
+   ======================================== */
+nav {
+    margin-top: var(--spacing-medium);
+}
+
+nav a {
+    color: var(--color-primary);
+    text-decoration: none;
+    margin-right: var(--spacing-large);
+    border-bottom: var(--border-width-thin) solid var(--color-primary);
+    padding-bottom: 2px;
+    transition: all var(--transition-duration);
+}
+
+nav a:hover {
+    background-color: var(--color-primary);
+    color: var(--color-background);
+    padding: 2px 5px;
+}

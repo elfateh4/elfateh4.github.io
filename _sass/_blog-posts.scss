@@ -1,0 +1,72 @@
+/* ========================================
+   Blog Post Styles
+   ======================================== */
+.blog-post {
+    margin-bottom: 30px;
+    padding-bottom: var(--spacing-xlarge);
+    border-bottom: var(--border-width-thin) solid var(--color-border);
+}
+
+.blog-post:last-child {
+    border-bottom: none;
+}
+
+.blog-post h2 {
+    font-size: 1.8em;
+    margin-bottom: var(--spacing-medium);
+}
+
+.blog-post h2 a {
+    color: var(--color-primary);
+    text-decoration: none;
+}
+
+.blog-post h2 a:hover {
+    text-decoration: underline;
+}
+
+.post-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.post-meta {
+    color: var(--color-secondary);
+    font-style: italic;
+    margin-bottom: var(--spacing-medium);
+}
+
+/* ========================================
+   Language Switcher and Tags
+   ======================================== */
+.lang-switcher {
+    margin-bottom: var(--spacing-medium);
+}
+
+.lang-link {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: bold;
+    border: var(--border-width-medium) solid var(--color-primary);
+    padding: 6px 12px;
+    display: inline-block;
+    transition: all var(--transition-duration);
+}
+
+.lang-link:hover {
+    background-color: var(--color-primary);
+    color: var(--color-background);
+}
+
+.tag {
+    display: inline-block;
+    padding: 4px 12px;
+    margin-right: 8px;
+    margin-bottom: 8px;
+    border: var(--border-width-thin) solid var(--color-primary);
+    font-size: 0.9em;
+    text-transform: lowercase;
+    background-color: var(--color-background);
+    color: var(--color-primary);
+}
