@@ -2,13 +2,13 @@
    Post Card (listing) Styles
    ======================================== */
 .post-card {
-    margin-bottom: 1.875rem; /* 30px */
-    padding-bottom: var(--spacing-2lg);
+    padding: var(--spacing-lg) 0;
     border-bottom: var(--border-width-thin) solid var(--color-border);
 }
 
 .post-card:last-child {
     border-bottom: none;
+    padding: 0;
 }
 
 .post-card h2 {
