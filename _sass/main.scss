@@ -1,9 +1,9 @@
-@use "base" as *;
-@use "header" as *;
-@use "navigation" as *;
-@use "post-card" as *;
-@use "post-content" as *;
-@use "footer" as *;
-@use "about" as *;
-@use "sidebar" as *;
-@use "responsive" as *;
+@import "base";
+@import "header";
+@import "navigation";
+@import "post-card";
+@import "post-content";
+@import "footer";
+@import "about";
+@import "sidebar";
+@import "responsive";

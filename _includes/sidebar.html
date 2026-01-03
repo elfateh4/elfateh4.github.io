@@ -54,7 +54,11 @@
             if (hrId) document.getElementById(hrId).style.display = 'none';
             return;
         }
-        document.getElementById(textId).textContent = item.text;
+        if (textId === 'poetry-text') {
+            document.getElementById(textId).innerHTML = item.text.replace(/\n/g, '<br>');
+        } else {
+            document.getElementById(textId).textContent = item.text;
+        }
         document.getElementById(authorId).textContent = item.author || '';
         // Use lang and dir attributes for per-quote language handling and accessibility
         if (item.lang) {
