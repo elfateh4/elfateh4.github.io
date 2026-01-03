@@ -1,0 +1,7 @@
+- text: "Example English quote."
+  author: "Author"
+  lang: "en"
+
+- text: "مثال اقتباس عربي."
+  author: "مؤلف"
+  lang: "ar"

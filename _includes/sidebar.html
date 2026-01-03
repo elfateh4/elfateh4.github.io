@@ -1,0 +1,74 @@
+<!-- The sidebar -->
+<div class="sidebar {% if page.lang == 'ar' %}ar{% endif %}">
+    <h2>Check this</h2>
+    <br>
+    <div class="card" id="quote-card-wrapper">
+    <h3>Quote</h3>
+    <blockquote class="sidebar-quote" id="quote-card">
+        <p id="quote-text"></p>
+        <cite id="quote-author"></cite>
+    </blockquote>
+    </div>
+
+    <hr id="hr1">
+
+    <div class="card" id="poetry-card-wrapper">
+    <h3>Poetry</h3>
+    <blockquote class="sidebar-quote" id="poetry-card">
+        <p id="poetry-text"></p>
+        <cite id="poetry-author"></cite>
+    </blockquote>
+    </div>
+
+    <hr id="hr2">
+
+    <div class="card" id="quran-card-wrapper">
+    <h3>Quran</h3>
+    <blockquote class="sidebar-quote" id="quran-card">
+        <p id="quran-text"></p>
+        <cite id="quran-author"></cite>
+    </blockquote>
+    </div>
+</div>
+
+<script>
+    const quotes = {{ site.data.quotes | jsonify }};
+    const poetry = {{ site.data.poetry | jsonify }};
+    const quranData = {{ site.data.quran | jsonify }};
+
+    function getRandom(arr) {
+        return arr[Math.floor(Math.random() * arr.length)];
+    }
+
+    function setQuote(wrapperId, cardId, textId, authorId, hrId, data) {
+        if (data.length === 0) {
+            document.getElementById(wrapperId).style.display = 'none';
+            if (hrId) document.getElementById(hrId).style.display = 'none';
+            return;
+        }
+        const item = getRandom(data);
+        if (!item || !item.text) {
+            document.getElementById(wrapperId).style.display = 'none';
+            if (hrId) document.getElementById(hrId).style.display = 'none';
+            return;
+        }
+        document.getElementById(textId).textContent = item.text;
+        document.getElementById(authorId).textContent = item.author;
+        const card = document.getElementById(cardId);
+        if (item.lang === 'ar') {
+            card.classList.add('ar');
+        }
+    }
+
+    setQuote('quote-card-wrapper', 'quote-card', 'quote-text', 'quote-author', null, quotes);
+    setQuote('poetry-card-wrapper', 'poetry-card', 'poetry-text', 'poetry-author', null, poetry);
+    setQuote('quran-card-wrapper', 'quran-card', 'quran-text', 'quran-author', null, quranData);
+
+    // Hide dividers if adjacent cards are hidden
+    if (document.getElementById('quote-card-wrapper').style.display === 'none' || document.getElementById('poetry-card-wrapper').style.display === 'none') {
+        document.getElementById('hr1').style.display = 'none';
+    }
+    if (document.getElementById('poetry-card-wrapper').style.display === 'none' || document.getElementById('quran-card-wrapper').style.display === 'none') {
+        document.getElementById('hr2').style.display = 'none';
+    }
+</script>
