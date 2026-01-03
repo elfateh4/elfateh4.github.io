@@ -110,14 +110,14 @@ nav a:hover {
    Main Content Styles
    ======================================== */
 main {
-    margin-bottom: 60px;
+    margin-bottom: 20px;
 }
 
 /* ========================================
    Blog Post Styles
    ======================================== */
 .blog-post {
-    margin-bottom: 50px;
+    margin-bottom: 30px;
     padding-bottom: var(--spacing-xlarge);
     border-bottom: var(--border-width-thin) solid var(--color-border);
 }
@@ -292,7 +292,7 @@ footer {
     border-top: var(--border-width-medium) solid var(--color-primary);
     padding-top: var(--spacing-large);
     text-align: center;
-    margin-top: var(--spacing-xxlarge);
+    margin-top: var(--spacing-medium);
 }
 
 /* ========================================
