@@ -54,13 +54,8 @@
             if (hrId) document.getElementById(hrId).style.display = 'none';
             return;
         }
-        if (textId === 'poetry-text') {
-            document.getElementById(textId).innerHTML = item.text.replace(/\n/g, '<br>');
-        } else {
-            document.getElementById(textId).textContent = item.text;
-        }
+        document.getElementById(textId).innerHTML = item.text.replace(/\n/g, '<br>');
         document.getElementById(authorId).textContent = item.author || '';
-        // Use lang and dir attributes for per-quote language handling and accessibility
         if (item.lang) {
             card.setAttribute('lang', item.lang);
             card.setAttribute('dir', item.lang === 'ar' ? 'rtl' : 'ltr');
@@ -74,7 +69,6 @@
             card.removeAttribute('dir');
             card.classList.remove('ar');
         }
-        // Ensure wrapper is visible (in case it was previously hidden)
         wrapper.style.display = '';
         if (hrId) document.getElementById(hrId).style.display = '';
     }
