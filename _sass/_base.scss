@@ -13,17 +13,23 @@
     --font-family-mono: 'Courier New', monospace;
 
     --line-height: 1.6;
-    --spacing-small: 10px;
-    --spacing-medium: 15px;
-    --spacing-large: 20px;
-    --spacing-xlarge: 30px;
-    --spacing-xxlarge: 40px;
+    --spacing-sm: 0.625rem;    /* 10px */
+    --spacing-md: 0.9375rem;   /* 15px */
+    --spacing-lg: 1.25rem;     /* 20px */
+    --spacing-2lg: 1.875rem;   /* 30px */
+    --spacing-3lg: 2.5rem;     /* 40px */
 
-    --border-width-thin: 1px;
-    --border-width-medium: 2px;
-    --border-width-thick: 4px;
+    --border-width-thin: 0.0625rem;  /* 1px */
+    --border-width-medium: 0.125rem; /* 2px */
+    --border-width-thick: 0.25rem;   /* 4px */
 
-    --transition-duration: 0.3s;
+    --transition-duration: 0.3s; 
+
+    /* Scrollbar variables (themeable) */
+    --scrollbar-bg: var(--color-accent);
+    --scrollbar-thumb: #000; /* solid black thumb */
+    --scrollbar-thumb-hover: #222; /* slightly lighter on hover */
+    --scrollbar-size: 12px;
 }
 
 /* ========================================
@@ -40,8 +46,8 @@ body {
     line-height: var(--line-height);
     color: var(--color-primary);
     background-color: var(--color-background);
-    margin: 0 3% 0 270px;
-    padding: var(--spacing-large);
+    margin: 0 3% 0 16.875rem; /* 270px */
+    padding: var(--spacing-lg);
 }
 
 /* ========================================
@@ -78,4 +84,39 @@ a {
 ::selection {
     background: var(--color-primary);
     color: var(--color-background);
+}
+
+/* ========================================
+   Scrollbar Styling (cross-browser)
+   ======================================== */
+/* Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-bg);
+}
+
+/* Keep a stable gutter so content doesn't jump when scrollbars appear */
+html {
+    scrollbar-gutter: stable;
+}
+
+/* WebKit-based browsers */
+::-webkit-scrollbar {
+    width: var(--scrollbar-size);
+    height: var(--scrollbar-size);
+}
+
+::-webkit-scrollbar-track {
+    background: var(--scrollbar-bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--scrollbar-thumb);
+    border-radius: 999px;
+    /* create a space around the thumb matching the track color */
+    border: calc(var(--border-width-thin) * 4) solid var(--scrollbar-bg);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--scrollbar-thumb-hover);
 }

@@ -4,14 +4,15 @@
 
 header {
     border-bottom: var(--border-width-medium) solid var(--color-primary);
-    padding-bottom: var(--spacing-large);
-    margin-bottom: var(--spacing-xxlarge);
+    padding-bottom: var(--spacing-lg);
+    margin-bottom: var(--spacing-3lg);
 }
 
 header .header-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
 }
 header h1 {
     font-size: 3.5em;
@@ -20,9 +21,10 @@ header h1 {
 header .header-content .subtitle {
     background-color: #000;
     color: #fff;
-    padding: 4px 8px;
-    margin-left: var(--spacing-medium);
-    font-size: 1.2em;
+    padding: 0.1rem 0.4rem;
+    flex-basis: 100%;
+    font-size: 1.2rem;
+    direction: rtl;
     font-weight: normal;
 }
 

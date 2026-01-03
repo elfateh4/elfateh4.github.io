@@ -1,0 +1,54 @@
+/* ========================================
+   Post Card (listing) Styles
+   ======================================== */
+.post-card {
+    margin-bottom: 1.875rem; /* 30px */
+    padding-bottom: var(--spacing-2lg);
+    border-bottom: var(--border-width-thin) solid var(--color-border);
+}
+
+.post-card:last-child {
+    border-bottom: none;
+}
+
+.post-card h2 {
+    font-size: 1.8em;
+    margin-bottom: var(--spacing-md);
+}
+
+.read-more {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: bold;
+    border: var(--border-width-medium) solid var(--color-primary);
+    padding: 0.5rem 1rem; /* 8px 16px */
+    display: block;             /* make block for margin auto to work */
+    width: max-content;        /* shrink to content */
+    margin-left: auto;         /* fallback for older browsers */
+    margin-inline-start: auto; /* align to inline end (right in LTR, left in RTL) */
+    transition: all var(--transition-duration);
+}
+
+.read-more:hover {
+    background-color: var(--color-primary);
+    color: var(--color-background);
+}
+
+.post-card .post-meta {
+    color: var(--color-secondary);
+    font-style: italic;
+    margin-bottom: var(--spacing-md);
+} 
+
+/* Tags and Arabic post adjustments */
+.post-card .post-tags {
+    margin: var(--spacing-sm) 0 var(--spacing-md);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.post-card.arabic {
+    font-family: var(--font-family-ar);
+    text-align: right; /* ensures headings/inline content align properly */
+}

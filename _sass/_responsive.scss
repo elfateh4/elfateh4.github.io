@@ -3,14 +3,14 @@
    ======================================== */
 @media (max-width: 600px) {
     body {
-        padding: var(--spacing-small);
+        padding: var(--spacing-sm);
     }
 
     header h1 {
         font-size: 2em;
     }
 
-    .blog-post h2 {
+    .blog-post h2, .post-card h2 {
         font-size: 1.5em;
     }
 }

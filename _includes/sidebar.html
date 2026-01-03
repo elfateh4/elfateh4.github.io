@@ -1,5 +1,5 @@
 <!-- The sidebar -->
-<div class="sidebar {% if page.lang == 'ar' %}ar{% endif %}">
+<div class="sidebar">
     <h2>Check this</h2>
     <br>
     <div class="card" id="quote-card-wrapper">
@@ -41,23 +41,38 @@
     }
 
     function setQuote(wrapperId, cardId, textId, authorId, hrId, data) {
-        if (data.length === 0) {
-            document.getElementById(wrapperId).style.display = 'none';
+        const wrapper = document.getElementById(wrapperId);
+        const card = document.getElementById(cardId);
+        if (!data || data.length === 0) {
+            wrapper.style.display = 'none';
             if (hrId) document.getElementById(hrId).style.display = 'none';
             return;
         }
         const item = getRandom(data);
         if (!item || !item.text) {
-            document.getElementById(wrapperId).style.display = 'none';
+            wrapper.style.display = 'none';
             if (hrId) document.getElementById(hrId).style.display = 'none';
             return;
         }
         document.getElementById(textId).textContent = item.text;
-        document.getElementById(authorId).textContent = item.author;
-        const card = document.getElementById(cardId);
-        if (item.lang === 'ar') {
-            card.classList.add('ar');
+        document.getElementById(authorId).textContent = item.author || '';
+        // Use lang and dir attributes for per-quote language handling and accessibility
+        if (item.lang) {
+            card.setAttribute('lang', item.lang);
+            card.setAttribute('dir', item.lang === 'ar' ? 'rtl' : 'ltr');
+            if (item.lang === 'ar') {
+                card.classList.add('ar');
+            } else {
+                card.classList.remove('ar');
+            }
+        } else {
+            card.removeAttribute('lang');
+            card.removeAttribute('dir');
+            card.classList.remove('ar');
         }
+        // Ensure wrapper is visible (in case it was previously hidden)
+        wrapper.style.display = '';
+        if (hrId) document.getElementById(hrId).style.display = '';
     }
 
     setQuote('quote-card-wrapper', 'quote-card', 'quote-text', 'quote-author', null, quotes);
