@@ -1,6 +1,7 @@
 <header>
   <div class="header-content">
     <h1><a href="{{ '/' | relative_url }}">{{ site.title }}</a></h1>
+    <div id="digital-clock"></div>
     <span class="subtitle">share some my random thoughts</span>
   </div>
   <nav>
@@ -16,4 +17,6 @@
       {% endif %}
     {% endfor %}
   </nav>
+  <script> var hijriDate = "{{ site.time | hijri_date }}"; </script>
+  <script src="{{ '/assets/js/clock.js' | relative_url }}"></script>
 </header>
