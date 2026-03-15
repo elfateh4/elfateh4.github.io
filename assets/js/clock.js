@@ -1,11 +1,15 @@
 function getHijriDate() {
   const now = new Date();
-  const hijri = new Intl.DateTimeFormat('en-u-ca-islamic-umalqma', {
+  const formatter = new Intl.DateTimeFormat('en-u-ca-islamic-umalqma', {
     day: 'numeric',
     month: 'long',
     year: 'numeric'
-  }).format(now);
-  return hijri + ' AH';
+  });
+  const parts = formatter.formatToParts(now);
+  const day = parts.find(p => p.type === 'day').value;
+  const month = parts.find(p => p.type === 'month').value;
+  const year = parts.find(p => p.type === 'year').value;
+  return `${day} ${month} ${year} AH`;
 }
 
 function updateClock() {
