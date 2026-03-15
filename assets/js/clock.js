@@ -7,24 +7,31 @@ const hijriMonthsEn = [
 function getHijriDate() {
   const now = new Date();
   const year = now.getFullYear();
-  const month = now.getMonth();
+  const month = now.getMonth() + 1;
   const day = now.getDate();
 
-  const gregorianDate = new Date(Date.UTC(year, month, day));
-  const julianDay = Math.floor((gregorianDate.getTime() / 86400000) + 2440587.5);
+  const m = month;
+  const y = m < 3 ? year - 1 : year;
+  const d = day;
 
-  const islamicEpoch = 1948439.5;
-  const daysSinceEpoch = julianDay - islamicEpoch;
-  const hijriYear = Math.ceil(daysSinceEpoch / 354.367067);
-  const daysInYear = (hijriYear - 1) * 354 + Math.floor((3 + 11 * hijriYear) / 30);
-  let hijriDay = Math.floor(daysSinceEpoch - daysInYear) + 1;
-  let hijriMonth = Math.floor((hijriDay - 1) / 29.5) + 1;
+  const c = Math.floor(y / 100);
+  const a = Math.floor(c / 4);
+  const b = 2 - c + a;
+  const jd = Math.floor(365.25 * (y + 4716)) + Math.floor(30.6001 * (m + 1)) + d + b - 1524.5;
 
-  if (hijriMonth > 12) hijriMonth = 12;
-  const daysInMonth = hijriMonth === 12 && ((hijriYear * 11 + 3) % 30 > 18) ? 30 : 29;
-  hijriDay = Math.min(hijriDay, daysInMonth);
+  const ijdl = Math.floor((30 * (jd - 1948439.5)) + 0.5);
+  const i = Math.floor((ijdl - 1) / 10631);
+  const l1 = ijdl - 10631 * i;
+  const l = Math.floor((l1 - 1) / 3545);
+  const k1 = l1 - 3545 * l + 30;
+  const j = Math.floor((80 * k1) / 2447.6941);
+  const d1 = k1 - Math.floor((2447.6941 * j) / 80);
+  const m1 = Math.floor(j / 11);
+  const month = j + 2 - 12 * m1;
+  const year = 10631 * i + 354 * l + j + 1;
+  const day = d1;
 
-  return `${hijriDay} ${hijriMonthsEn[hijriMonth - 1]} ${hijriYear} AH`;
+  return `${day} ${hijriMonthsEn[month - 1]} ${year} AH`;
 }
 
 function updateClock() {
