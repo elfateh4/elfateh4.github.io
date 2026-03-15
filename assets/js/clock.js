@@ -1,6 +1,11 @@
-// Function to calculate Hijri date - now using Jekyll-generated value
 function getHijriDate() {
-  return hijriDate;
+  const now = new Date();
+  const hijri = new Intl.DateTimeFormat('en-u-ca-islamic-umalqma', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric'
+  }).format(now);
+  return hijri + ' AH';
 }
 
 function updateClock() {
