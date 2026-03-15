@@ -6,8 +6,8 @@ const hijriMonthsEn = [
 
 function getHijriDate() {
   const now = new Date();
-  const h = new HijriDate(now.getTime());
-  return `${h.getDate()} ${hijriMonthsEn[h.getMonth() - 1]} ${h.getFullYear()} AH`;
+  const d = umalqura(now);
+  return `${d.hd} ${hijriMonthsEn[d.hm - 1]} ${d.hy} AH`;
 }
 
 function updateClock() {

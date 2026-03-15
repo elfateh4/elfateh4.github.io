@@ -15,7 +15,7 @@ Design tokens are the atomic building blocks of a design system. They're the sin
 
 Design tokens are named entities that store visual design attributes. Instead of hardcoding values like `#13ADE3` throughout your codebase, you define it once as a token:
 
-\`\`\`json
+```
 {
   "global": {
     "primary": {
@@ -23,9 +23,9 @@ Design tokens are named entities that store visual design attributes. Instead of
     }
   }
 }
-\`\`\`
+```
 
-This becomes a CSS custom property: \`--global-primary-500: #13ADE3;\`
+This becomes a CSS custom property: `--global-primary-500: #13ADE3;`
 
 ## The Three-Tier Token Architecture
 
@@ -34,7 +34,7 @@ I structured my tokens into three tiers:
 ### 1. Global Tokens (Raw Values)
 These are your palette - the raw color values, base font sizes, and spacing units:
 
-\`\`\`json
+```
 {
   "global": {
     "primary": {
@@ -45,12 +45,12 @@ These are your palette - the raw color values, base font sizes, and spacing unit
     }
   }
 }
-\`\`\`
+```
 
 ### 2. Semantic Tokens (Contextual Meaning)
 These give meaning to the raw values. Instead of "primary-500", you have "brand-primary":
 
-\`\`\`json
+```
 {
   "brand": {
     "primary": { "value": "var(--global-primary-main)" },
@@ -58,43 +58,43 @@ These give meaning to the raw values. Instead of "primary-500", you have "brand-
     "primary-dark": { "value": "var(--global-primary-600)" }
   }
 }
-\`\`\`
+```
 
 ### 3. Component Tokens (Specific Usage)
 These are tokens for specific UI components:
 
-\`\`\`json
+```
 {
   "button": {
     "bg": { "value": "var(--brand-primary)" },
     "text": { "value": "var(--text-color-on-primary)" }
   }
 }
-\`\`\`
+```
 
 ## Dark Mode: The Key Insight
 
 Here's where it gets interesting. For dark mode, **semantic tokens change, but component code doesn't**.
 
-Light mode (\`general.json\`):
-\`\`\`json
+Light mode (`general.json`):
+```
 {
   "brand": {
     "primary": { "value": "var(--global-primary-main)" },
     "primary-light": { "value": "var(--global-primary-100)" }
   }
 }
-\`\`\`
+```
 
-Dark mode (\`general.dark.json\`):
-\`\`\`json
+Dark mode (`general.dark.json`):
+```
 {
   "brand": {
     "primary": { "value": "var(--global-primary-400)" },
     "primary-light": { "value": "var(--global-primary-900)" }
   }
 }
-\`\`\`
+```
 
 Notice how \`--brand-primary\` maps to lighter variants in dark mode for better contrast.
 
@@ -102,26 +102,26 @@ Notice how \`--brand-primary\` maps to lighter variants in dark mode for better 
 
 Here's my ESM configuration that builds both light and dark tokens:
 
-\`\`\`javascript
+```javascript
 import StyleDictionary from 'style-dictionary';
 
 // Custom format for dark mode CSS
 StyleDictionary.registerFormat({
   name: 'css/variables-dark',
   format: function({ dictionary }) {
-    return \`[data-theme="dark"] {
-\${dictionary.allTokens.map(token => 
-  \`  --\${token.name}: \${token.value};\`
-).join('\\n')}
+    return `[data-theme="dark"] {
+${dictionary.allTokens.map(token => 
+  `  --${token.name}: ${token.value};`
+).join('\n')}
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-\${dictionary.allTokens.map(token => 
-  \`    --\${token.name}: \${token.value};\`
-).join('\\n')}
+${dictionary.allTokens.map(token => 
+  `    --${token.name}: ${token.value};`
+).join('\n')}
   }
-}\`;
+}`;
   }
 });
 
@@ -162,13 +162,13 @@ const darkSD = new StyleDictionary({
 
 await lightSD.buildAllPlatforms();
 await darkSD.buildAllPlatforms();
-\`\`\`
+```
 
 ## The Golden Rule: Never Use Global Tokens Directly
 
 In your components, always use semantic tokens:
 
-\`\`\`css
+```css
 /* ❌ Bad - hardcoded to light mode */
 .button {
   background: var(--global-primary-main);
@@ -178,18 +178,18 @@ In your components, always use semantic tokens:
 .button {
   background: var(--brand-primary);
 }
-\`\`\`
+```
 
 ## Token Categories I Use
 
 | Category | Purpose | Examples |
 |----------|---------|----------|
-| \`--brand-*\` | Brand colors | primary, secondary, accent |
-| \`--status-*\` | Feedback states | success, warning, error, info |
-| \`--neutral-*\` | Gray scale | 100-600 shades |
-| \`--surface-*\` | Backgrounds | bg-primary, bg-card, border |
-| \`--text-*\` | Typography | heading, body, muted, link |
-| \`--interactive-*\` | UI elements | hover, focus, disabled states |
+| `--brand-*` | Brand colors | primary, secondary, accent |
+| `--status-*` | Feedback states | success, warning, error, info |
+| `--neutral-*` | Gray scale | 100-600 shades |
+| `--surface-*` | Backgrounds | bg-primary, bg-card, border |
+| `--text-*` | Typography | heading, body, muted, link |
+| `--interactive-*` | UI elements | hover, focus, disabled states |
 
 ## Real-World Impact
 
@@ -215,5 +215,3 @@ Design tokens are a game-changer for maintaining consistent UI at scale. Style D
 The key insight is that **semantic tokens are the interface your components should depend on**. Raw values (global tokens) and theme variations (dark mode) become implementation details that can change without touching component code.
 
 Start small, but start with the right architecture. Your future self will thank you.
-
-> "The best code is the code that writes itself through good abstractions." - Every developer who's discovered design tokens
